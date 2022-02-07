@@ -5,7 +5,7 @@ use eframe::{
 
 struct QuadraticPlotter {
     data: Data,
-    resolution: i16,
+    quality: i16,
 }
 
 impl QuadraticPlotter {
@@ -16,7 +16,7 @@ impl QuadraticPlotter {
                 b: 0.,
                 c: 0.,
             },
-            resolution: 101,
+            quality: 101,
         }
     }
 }
@@ -64,13 +64,13 @@ impl epi::App for QuadraticPlotter {
                     ui.add(
                         egui::Slider::from_get_set(5.0..=501.0, |x| {
                             if let Some(x) = x {
-                                self.resolution = (x / 2.).floor() as i16 * 2 + 1;
+                                self.quality = (x / 2.).floor() as i16 * 2 + 1;
                             }
-                            self.resolution.into()
+                            self.quality.into()
                         })
                         .fixed_decimals(0)
                         .logarithmic(true)
-                        .prefix("Resolution: "),
+                        .prefix("Quality: "),
                     );
                 })
             });
@@ -82,7 +82,7 @@ impl epi::App for QuadraticPlotter {
                     plot_ui.line(plot::Line::new(plot::Values::from_explicit_callback(
                         move |x| data.a * x.powi(2) + data.b * x + data.c,
                         ..,
-                        self.resolution as usize,
+                        self.quality as usize,
                     )))
                 });
         });
