@@ -5,4 +5,4 @@ version = "1.0.0"
 edition = "2021"
 
 [dependencies]
-eframe = "0.16"
+eframe = "0.17"
